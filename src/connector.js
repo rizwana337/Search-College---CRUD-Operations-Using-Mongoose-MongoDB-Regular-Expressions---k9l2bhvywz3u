@@ -1,4 +1,3 @@
-
 //const mongodb = require('mongodb');
 
 const mongoURI = "mongodb://localhost:27017" + "/collegeDetails"
@@ -13,5 +12,9 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
         console.log("error while connection", err)
     });
 let collegeModel = mongoose.model('collegerecords', collegeSchema)
+let data = require('./data')
+collegeModel.deleteMany().then(e => {
+    collegeModel.insertMany(data.data)
+})
 
 exports.connection = collegeModel;
